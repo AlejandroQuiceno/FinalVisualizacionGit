@@ -24,11 +24,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveTexture:
-        m_Texture: {fileID: 2800000, guid: 04171e1d22a62a44aaa19c56a60953cd, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emision:
@@ -58,13 +58,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dissolve: 0
-    - _EdgeWidth: -6.27
-    - _MeshHeight: 1
+    - _EdgeWidth: 0.06
+    - _MeshHeight: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _smothness: 0
     m_Colors:
-    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.07132578, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _EdgeColor: {r: 1.7563325, g: 1.7563325, b: 1.7563325, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6097804817179593054
 MonoBehaviour:
