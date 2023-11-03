@@ -7,6 +7,8 @@ public class RayOutliner : MonoBehaviour
     private Camera cam;
     private GameObject prevHitObj;
     private Outlinable prevOutlinable;
+    private ToolTip prevTooltip;
+    private ToolTip toolTip;
 
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private float rayDist = 10f;
@@ -18,42 +20,67 @@ public class RayOutliner : MonoBehaviour
 
     void Update()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, rayDist, interactableLayer))
+        if (Input.GetButtonDown("Fire1"))
         {
-            GameObject hitObj = hit.collider.gameObject;
-            Outlinable outlinable = hitObj.GetComponent<Outlinable>();
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            if (outlinable != null)
+            if (Physics.Raycast(ray, out hit, rayDist, interactableLayer))
             {
-                if (prevOutlinable != outlinable)
+                GameObject hitObj = hit.collider.gameObject;
+                Outlinable outlinable = hitObj.GetComponent<Outlinable>();
+                toolTip = hitObj.GetComponent<ToolTip>();
+                if (toolTip == prevTooltip)
                 {
-                    if (prevOutlinable != null)
+                    toolTip.togglePanel();
+                }
+                else
+                {
+                    if (outlinable != null && toolTip != null)
                     {
-                        prevOutlinable.enabled = false;
+                        if (prevOutlinable != outlinable)
+                        {
+                            if (prevOutlinable != null)
+                            {
+                                prevTooltip.tooltip.SetActive(false);
+                                prevOutlinable.enabled = false;
+                            }
+                            outlinable.enabled = true;
+                            toolTip.tooltip.SetActive(true);
+                            prevOutlinable = outlinable;
+                            prevTooltip = toolTip;
+                        }
                     }
-                    outlinable.enabled = true;
-                    prevOutlinable = outlinable;
+                    else
+                    {
+                        if (prevOutlinable != null && prevTooltip != null)
+                        {
+                            if (prevTooltip.opened)
+                            {
+                                prevTooltip.togglePanel();
+                            }
+                            prevTooltip.tooltip.SetActive(false);
+                            prevTooltip = null;
+                            prevOutlinable.enabled = false;
+                            prevOutlinable = null;
+                        }
+                    }
+                    prevHitObj = hitObj;
                 }
             }
             else
             {
-                if (prevOutlinable != null)
+                if (prevOutlinable != null && prevTooltip != null)
                 {
+                    if (prevTooltip.opened)
+                    {
+                        prevTooltip.togglePanel();
+                    }
+                    prevTooltip.tooltip.SetActive(false);
+                    prevTooltip = null;
                     prevOutlinable.enabled = false;
                     prevOutlinable = null;
                 }
-            }
-            prevHitObj = hitObj;
-        }
-        else
-        {
-            if (prevOutlinable != null)
-            {
-                prevOutlinable.enabled = false;
-                prevOutlinable = null;
             }
         }
     }
