@@ -30,6 +30,11 @@ public class RayOutliner : MonoBehaviour
                 GameObject hitObj = hit.collider.gameObject;
                 Outlinable outlinable = hitObj.GetComponent<Outlinable>();
                 toolTip = hitObj.GetComponent<ToolTip>();
+
+                if (toolTip != prevTooltip && prevTooltip != null && prevTooltip.opened)
+                {
+                    prevTooltip.togglePanel();
+                }
                 if (toolTip == prevTooltip)
                 {
                     toolTip.togglePanel();
@@ -55,10 +60,6 @@ public class RayOutliner : MonoBehaviour
                     {
                         if (prevOutlinable != null && prevTooltip != null)
                         {
-                            if (prevTooltip.opened)
-                            {
-                                prevTooltip.togglePanel();
-                            }
                             prevTooltip.tooltip.SetActive(false);
                             prevTooltip = null;
                             prevOutlinable.enabled = false;
