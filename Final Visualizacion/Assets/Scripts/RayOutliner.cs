@@ -4,7 +4,7 @@ using UnityEngine;
 using EPOOutline;
 public class RayOutliner : MonoBehaviour
 {
-    private Camera cam;
+    public Camera cam;
     private GameObject prevHitObj;
     private Outlinable prevOutlinable;
     private ToolTip prevTooltip;
@@ -12,11 +12,6 @@ public class RayOutliner : MonoBehaviour
 
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private float rayDist = 10f;
-
-    void Start()
-    {
-        cam = GetComponent<Camera>();
-    }
 
     void Update()
     {
@@ -28,46 +23,9 @@ public class RayOutliner : MonoBehaviour
             if (Physics.Raycast(ray, out hit, rayDist, interactableLayer))
             {
                 GameObject hitObj = hit.collider.gameObject;
-                Outlinable outlinable = hitObj.GetComponent<Outlinable>();
+                hitObj.TryGetComponent(out Outlinable outlinable);
                 toolTip = hitObj.GetComponent<ToolTip>();
-
-                if (toolTip != prevTooltip && prevTooltip != null && prevTooltip.opened)
-                {
-                    prevTooltip.togglePanel();
-                }
-                if (toolTip == prevTooltip)
-                {
-                    toolTip.togglePanel();
-                }
-                else
-                {
-                    if (outlinable != null && toolTip != null)
-                    {
-                        if (prevOutlinable != outlinable)
-                        {
-                            if (prevOutlinable != null)
-                            {
-                                prevTooltip.tooltip.SetActive(false);
-                                prevOutlinable.enabled = false;
-                            }
-                            outlinable.enabled = true;
-                            toolTip.tooltip.SetActive(true);
-                            prevOutlinable = outlinable;
-                            prevTooltip = toolTip;
-                        }
-                    }
-                    else
-                    {
-                        if (prevOutlinable != null && prevTooltip != null)
-                        {
-                            prevTooltip.tooltip.SetActive(false);
-                            prevTooltip = null;
-                            prevOutlinable.enabled = false;
-                            prevOutlinable = null;
-                        }
-                    }
-                    prevHitObj = hitObj;
-                }
+                HitCollider(hitObj, outlinable, toolTip);
             }
             else
             {
@@ -82,6 +40,64 @@ public class RayOutliner : MonoBehaviour
                     prevOutlinable.enabled = false;
                     prevOutlinable = null;
                 }
+            }
+        }
+        void HitCollider(GameObject hitObj, Outlinable outlinable, ToolTip toolTip)
+        {
+            if (toolTip != prevTooltip && prevTooltip != null && prevTooltip.opened)
+            {
+                prevTooltip.togglePanel();
+            }
+            if (toolTip == prevTooltip)
+            {
+                toolTip.togglePanel();
+            }
+            else
+            {
+                if (outlinable != null && toolTip != null)
+                {
+                    if (prevOutlinable != outlinable)
+                    {
+                        if (prevOutlinable != null)
+                        {
+                            prevTooltip.tooltip.SetActive(false);
+                            prevOutlinable.enabled = false;
+                        }
+                        outlinable.enabled = true;
+                        toolTip.tooltip.SetActive(true);
+                        prevOutlinable = outlinable;
+                        prevTooltip = toolTip;
+                    }
+                }
+                else if (outlinable == null && toolTip != null)
+                {
+                    if(prevOutlinable != null)
+                    {
+                        prevTooltip.tooltip.SetActive(false);
+                        prevOutlinable.enabled = false;
+                        prevTooltip.tooltip.SetActive(false);
+                        prevTooltip = null;
+                    }
+                    else if(prevTooltip != null)
+                    {
+                        prevTooltip.tooltip.SetActive(false);
+                        prevTooltip = null;
+                    }
+                    toolTip.tooltip.SetActive(true);
+                    prevOutlinable = null;
+                    prevTooltip = toolTip;
+                }
+                else
+                {
+                    if (prevOutlinable != null && prevTooltip != null)
+                    {
+                        prevTooltip.tooltip.SetActive(false);
+                        prevTooltip = null;
+                        prevOutlinable.enabled = false;
+                        prevOutlinable = null;
+                    }
+                }
+                prevHitObj = hitObj;
             }
         }
     }
