@@ -6,10 +6,8 @@ public class RayOutliner : MonoBehaviour
 {
     public Camera cam;
     private GameObject prevHitObj;
-    private Outlinable prevOutlinable;
-    private ToolTip prevTooltip;
-    private ToolTip toolTip;
-
+    private Interactable prevInteractable;
+    private Interactable interactable;
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private float rayDist = 10f;
 
@@ -19,85 +17,28 @@ public class RayOutliner : MonoBehaviour
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
             if (Physics.Raycast(ray, out hit, rayDist, interactableLayer))
             {
                 GameObject hitObj = hit.collider.gameObject;
-                hitObj.TryGetComponent(out Outlinable outlinable);
-                toolTip = hitObj.GetComponent<ToolTip>();
-                HitCollider(hitObj, outlinable, toolTip);
+                interactable = hitObj.GetComponent<Interactable>();
+                interactable.Select(prevInteractable);  
+                if (prevInteractable != null && prevInteractable != interactable)
+                {
+                    prevInteractable.DesSelect();
+                }
+                prevInteractable = interactable;
             }
             else
             {
-                if (prevOutlinable != null && prevTooltip != null)
+                if(prevInteractable != null)
                 {
-                    if (prevTooltip.opened)
-                    {
-                        prevTooltip.togglePanel();
-                    }
-                    prevTooltip.tooltip.SetActive(false);
-                    prevTooltip = null;
-                    prevOutlinable.enabled = false;
-                    prevOutlinable = null;
-                }
-            }
-        }
-        void HitCollider(GameObject hitObj, Outlinable outlinable, ToolTip toolTip)
-        {
-            if (toolTip != prevTooltip && prevTooltip != null && prevTooltip.opened)
-            {
-                prevTooltip.togglePanel();
-            }
-            if (toolTip == prevTooltip)
-            {
-                toolTip.togglePanel();
-            }
-            else
-            {
-                if (outlinable != null && toolTip != null)
-                {
-                    if (prevOutlinable != outlinable)
-                    {
-                        if (prevOutlinable != null)
-                        {
-                            prevTooltip.tooltip.SetActive(false);
-                            prevOutlinable.enabled = false;
-                        }
-                        outlinable.enabled = true;
-                        toolTip.tooltip.SetActive(true);
-                        prevOutlinable = outlinable;
-                        prevTooltip = toolTip;
-                    }
-                }
-                else if (outlinable == null && toolTip != null)
-                {
-                    if(prevOutlinable != null)
-                    {
-                        prevTooltip.tooltip.SetActive(false);
-                        prevOutlinable.enabled = false;
-                        prevTooltip.tooltip.SetActive(false);
-                        prevTooltip = null;
-                    }
-                    else if(prevTooltip != null)
-                    {
-                        prevTooltip.tooltip.SetActive(false);
-                        prevTooltip = null;
-                    }
-                    toolTip.tooltip.SetActive(true);
-                    prevOutlinable = null;
-                    prevTooltip = toolTip;
+                    prevInteractable.DesSelect();
+                    prevInteractable = null;
                 }
                 else
                 {
-                    if (prevOutlinable != null && prevTooltip != null)
-                    {
-                        prevTooltip.tooltip.SetActive(false);
-                        prevTooltip = null;
-                        prevOutlinable.enabled = false;
-                        prevOutlinable = null;
-                    }
+                    prevInteractable = null;
                 }
-                prevHitObj = hitObj;
             }
         }
     }
