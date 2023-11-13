@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 6353305863539137519}
   - component: {fileID: 1710773145125144744}
   - component: {fileID: 364493816053425436}
+  - component: {fileID: 1254975299720392309}
   m_Layer: 0
   m_Name: Camera (1)
   m_TagString: Untagged
@@ -377,11 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3bd859aa3fe94d44b3dc0efbb6db44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 8706386002122408228}
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  rayDist: 10
 --- !u!114 &1710773145125144744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,3 +411,20 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &1254975299720392309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571025672230068997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1359d01d3d80641a4c8fb7360c8e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 8706386002122408228}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  rayDist: 10

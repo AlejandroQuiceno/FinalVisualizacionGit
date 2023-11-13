@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 170826130}
   - component: {fileID: 170826129}
   - component: {fileID: 170826128}
+  - component: {fileID: 170826135}
   m_Layer: 0
   m_Name: Camera (1)
   m_TagString: Untagged
@@ -598,11 +599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3bd859aa3fe94d44b3dc0efbb6db44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 170826134}
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  rayDist: 10
 --- !u!114 &170826131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,6 +727,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &170826135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170826126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1359d01d3d80641a4c8fb7360c8e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 170826134}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  rayDist: 10
 --- !u!1 &171179237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,9 +1307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4256829afdec6ae4aaa80bcf17d64057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 209352784}
-  renderTexture: {fileID: 8400000, guid: 11b236b9c316cf249a5da01c8881df83, type: 2}
-  camera: {fileID: 228283204}
 --- !u!1 &231868643
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,7 +1951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 0}
 --- !u!1 &353997289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 0}
 --- !u!1 &380594828
 GameObject:
   m_ObjectHideFlags: 0
@@ -3331,7 +3341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 0}
 --- !u!1 &637180319
 GameObject:
   m_ObjectHideFlags: 0
@@ -3678,6 +3688,7 @@ GameObject:
   - component: {fileID: 671839741}
   - component: {fileID: 671839740}
   - component: {fileID: 671839746}
+  - component: {fileID: 671839747}
   m_Layer: 6
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -3854,7 +3865,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 671839747}
+--- !u!114 &671839747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671839738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43113e9309fac044f81c50a06e8b42e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvokeOnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &698332027
 GameObject:
   m_ObjectHideFlags: 0
@@ -4476,7 +4502,6 @@ GameObject:
   m_Component:
   - component: {fileID: 926604421}
   - component: {fileID: 926604420}
-  - component: {fileID: 926604422}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -4528,18 +4553,6 @@ Transform:
   - {fileID: 170826127}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &926604422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926604419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23575c1738e5aab44a52cab94aa2a352, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &927016815 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2513026384787598863, guid: 3b604a333d041db4baf359775ba109a5, type: 3}
@@ -4567,6 +4580,7 @@ GameObject:
   - component: {fileID: 961749832}
   - component: {fileID: 961749831}
   - component: {fileID: 961749838}
+  - component: {fileID: 961749839}
   m_Layer: 6
   m_Name: Sphere (2)
   m_TagString: Untagged
@@ -4769,7 +4783,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 0}
+--- !u!114 &961749839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961749830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43113e9309fac044f81c50a06e8b42e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvokeOnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &972064965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6340,7 +6369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 0}
 --- !u!1001 &1387072568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7041,7 +7070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 0}
 --- !u!1001 &1552706048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7606,7 +7635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 0}
 --- !u!1 &1693303327
 GameObject:
   m_ObjectHideFlags: 0
@@ -8764,7 +8793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  outlinable: {fileID: 0}
+  activator: {fileID: 0}
 --- !u!1 &2050096517
 GameObject:
   m_ObjectHideFlags: 0

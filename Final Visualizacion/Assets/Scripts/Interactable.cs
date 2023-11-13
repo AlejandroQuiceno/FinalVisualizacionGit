@@ -5,28 +5,34 @@ using EPOOutline;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] ToolTip toolTip;
-    [SerializeField] Outlinable outlinable;
+    [SerializeField] Activator activator;
     private void Awake()
-    {
-        TryGetComponent<ToolTip>(out toolTip);
-        TryGetComponent<Outlinable>(out outlinable);
+    { 
+        if(toolTip == null)
+        {
+            TryGetComponent<ToolTip>(out toolTip);
+        }
+        if(activator == null)
+        {
+            TryGetComponent<Activator>(out activator);
+        }
     }
-    public void Select(Interactable preInteractable)
+    public void Interact(Interactable prevInteractable)
     {
         if(toolTip != null)
         {
             toolTip.tooltip.SetActive(true);
-            if(preInteractable == this)
+            if(prevInteractable == this)
             {
                 toolTip.togglePanel();
             }
         }
-        if(outlinable != null)
+        if (activator != null)
         {
-            outlinable.enabled = true;
+            activator.TriggerEvents();
         }
     }
-    public void DesSelect()
+    public void StopInteracting()
     {
         if (toolTip != null)
         {
@@ -35,10 +41,6 @@ public class Interactable : MonoBehaviour
             {
                 toolTip.togglePanel();
             }
-        }
-        if (outlinable != null)
-        {
-            outlinable.enabled = false;
         }
     }
 }

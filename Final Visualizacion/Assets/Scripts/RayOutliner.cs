@@ -4,41 +4,32 @@ using UnityEngine;
 using EPOOutline;
 public class RayOutliner : MonoBehaviour
 {
-    public Camera cam;
-    private GameObject prevHitObj;
-    private Interactable prevInteractable;
-    private Interactable interactable;
-    [SerializeField] private LayerMask interactableLayer;
-    [SerializeField] private float rayDist = 10f;
-
+    private Outlinable previousOutlinable;
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        Ray ray = new Ray(transform.position, transform.forward);
+        float maxRaycastDistance = 10f;
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, maxRaycastDistance))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, rayDist, interactableLayer))
+            Outlinable currentOutlinable = hit.collider.gameObject.GetComponent<Outlinable>();
+
+            if (currentOutlinable != null)
             {
-                GameObject hitObj = hit.collider.gameObject;
-                interactable = hitObj.GetComponent<Interactable>();
-                interactable.Select(prevInteractable);  
-                if (prevInteractable != null && prevInteractable != interactable)
+                currentOutlinable.enabled = true;
+                if (previousOutlinable != null && previousOutlinable != currentOutlinable)
                 {
-                    prevInteractable.DesSelect();
+                    previousOutlinable.enabled = false;
                 }
-                prevInteractable = interactable;
+                previousOutlinable = currentOutlinable;
             }
-            else
+        }
+        else
+        {
+            if (previousOutlinable != null)
             {
-                if(prevInteractable != null)
-                {
-                    prevInteractable.DesSelect();
-                    prevInteractable = null;
-                }
-                else
-                {
-                    prevInteractable = null;
-                }
+                previousOutlinable.enabled = false;
+                previousOutlinable = null;
             }
         }
     }
