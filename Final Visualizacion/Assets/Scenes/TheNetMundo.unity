@@ -439,7 +439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1095849346
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -703,7 +703,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5.73
+      scalar: 2.66
       minScalar: -0.7
       maxCurve:
         serializedVersion: 2
@@ -5659,14 +5659,6 @@ PrefabInstance:
     - target: {fileID: 3142103408294613818, guid: 8dc837c533f41f94c9c8142cbcb58f67, type: 3}
       propertyPath: m_Name
       value: NET TERRAIN
-      objectReference: {fileID: 0}
-    - target: {fileID: 7253799442696385923, guid: 8dc837c533f41f94c9c8142cbcb58f67, type: 3}
-      propertyPath: m_TerrainData
-      value: 
-      objectReference: {fileID: 15600000, guid: ce62f22c2d923a74ea0d4d7148cdb328, type: 2}
-    - target: {fileID: 7826837960405476610, guid: 8dc837c533f41f94c9c8142cbcb58f67, type: 3}
-      propertyPath: m_TerrainData
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8170012021229303297, guid: 8dc837c533f41f94c9c8142cbcb58f67, type: 3}
       propertyPath: m_LocalPosition.x
