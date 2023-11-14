@@ -7,14 +7,14 @@ public class IdleIcon : MonoBehaviour
 {
     float initialY;
     [SerializeField] float offset;
+    [SerializeField] float AnimationTime;
     private void Awake()
     {
-        initialY = transform.position.y;
-        offset += initialY;
+        initialY = transform.localPosition.y;
     }
     private void Start()
     {   
-            transform.DOMoveY(initialY+0.1f, 1f)
+            transform.DOLocalMoveY(offset + 0.1f, AnimationTime)
         .SetLoops(-1, LoopType.Yoyo)
         .SetEase(Ease.InOutSine);
     }
