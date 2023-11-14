@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Tomas pt2.unity
-    guid: 9c38076af898b784d8acdfefb28fb238
+    path: Assets/Scenes/Tomas.unity
+    guid: db34b126493675e468050fc0d66d70e6
   - enabled: 1
     path: Assets/Scenes/Video Cerebro.unity
     guid: 64e6d1f0ae2842444bf9d1a5722390f2
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DesertMundo.unity
     guid: e5b4e4be1235d50419c7dd8bf54ff53b
+  - enabled: 0
+    path: Assets/Scenes/Tomas pt2.unity
+    guid: 9c38076af898b784d8acdfefb28fb238
   m_configObjects: {}

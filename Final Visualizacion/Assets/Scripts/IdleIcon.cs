@@ -14,7 +14,7 @@ public class IdleIcon : MonoBehaviour
     }
     private void Start()
     {   
-            transform.DOLocalMoveY(offset + 0.1f, AnimationTime)
+         transform.DOLocalMoveY(initialY- offset, AnimationTime)
         .SetLoops(-1, LoopType.Yoyo)
         .SetEase(Ease.InOutSine);
     }

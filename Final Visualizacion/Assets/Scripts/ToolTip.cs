@@ -14,7 +14,12 @@ public class ToolTip : MonoBehaviour
     [SerializeField] string body;
     [SerializeField] public GameObject tooltip;
     public bool opened;
-
+    public bool firsInteraction;
+    countToolTips countToolTips;
+    private void Awake()
+    {
+        countToolTips = FindObjectOfType<countToolTips>();
+    }
     private void Start()
     {
         panelB.alpha = 0;
@@ -32,6 +37,13 @@ public class ToolTip : MonoBehaviour
         }
         else
         {
+            if (!firsInteraction)
+            {
+                firsInteraction = true;
+                countToolTips.AddCount();
+            }
+
+
             panelA.DOFade(0, 0.5f);
             panelB.DOFade(1, 0.5f).SetDelay(0.1f);
             opened = true;

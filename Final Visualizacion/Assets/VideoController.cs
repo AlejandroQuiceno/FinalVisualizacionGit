@@ -2,7 +2,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
+using DG.Tweening;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
 public class VideoController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
@@ -10,8 +14,22 @@ public class VideoController : MonoBehaviour
     public string sceneToLoad;
 
     private bool isPaused = false;
+    private bool videoStarted;
 
-    void Start()
+    [SerializeField] CanvasGroup[] canvaces;
+
+    private void Start()
+    {
+        StartCoroutine(Video());
+    }
+    IEnumerator Video()
+    {
+        yield return new WaitForSeconds(10f);
+        canvaces[0].DOFade(0, 1);
+        yield return new WaitForSeconds(1f);
+        StartVideo();
+    }
+    void StartVideo()
     {
         // Retrieve the scene name from PlayerPrefs
         sceneToLoad = PlayerPrefs.GetString("SceneToLoad");
@@ -23,7 +41,7 @@ public class VideoController : MonoBehaviour
 
         // Start playing the video
         videoPlayer.Play();
-
+        videoStarted = true;
         // Invoke a method to pause the video after 4 seconds
         Invoke("PauseVideo", 4f);
     }
@@ -60,6 +78,11 @@ public class VideoController : MonoBehaviour
     }
 
     void OnVideoEnd(VideoPlayer vp)
+    {
+        Invoke("LoadScene", 5f);
+        canvaces[1].DOFade(1, 1);
+    }
+    void LoadScene()
     {
         SceneManager.LoadScene(sceneToLoad);
     }

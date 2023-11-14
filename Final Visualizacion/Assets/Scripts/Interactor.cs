@@ -7,7 +7,7 @@ public class Interactor : MonoBehaviour
 {
     public Camera cam;
     private GameObject prevHitObj;
-    private Interactable prevInteractable;
+    private Interactable prevInteractable = null;
     private Interactable interactable;
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private float rayDist = 10f;
