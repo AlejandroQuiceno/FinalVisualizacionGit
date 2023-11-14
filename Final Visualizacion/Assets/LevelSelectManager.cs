@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectManager : MonoBehaviour
 {
-    public List<Sprite> levelSprites;  // List of sprites to display
+    public List<Sprite> levelSprites; // List of sprites
+    public List<string> sceneNames; // List of scene names
     public SpriteRenderer spriteRenderer;
 
     private int currentIndex = 0;
@@ -12,33 +14,41 @@ public class LevelSelectManager : MonoBehaviour
     {
         if (spriteRenderer == null)
         {
-            // If SpriteRenderer is not assigned, try to find one on the same GameObject
             spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.drawMode = SpriteDrawMode.Simple;
         }
 
         UpdateSprite();
     }
 
-    // Move to the next sprite in the list
     public void NextLevel()
     {
         currentIndex = (currentIndex + 1) % levelSprites.Count;
         UpdateSprite();
     }
 
-    // Move to the previous sprite in the list
     public void PreviousLevel()
     {
         currentIndex = (currentIndex - 1 + levelSprites.Count) % levelSprites.Count;
         UpdateSprite();
     }
 
-    // Update the SpriteRenderer with the current sprite
     private void UpdateSprite()
     {
-        if (levelSprites.Count > 0 && spriteRenderer != null)
+        if (levelSprites.Count > 0 && spriteRenderer != null && sceneNames.Count > 0)
         {
             spriteRenderer.sprite = levelSprites[currentIndex];
+
+            // Save the selected scene name to PlayerPrefs
+            PlayerPrefs.SetString("SceneToLoad", sceneNames[currentIndex]);
+            PlayerPrefs.Save();
+
+            // For a real game, you might load the scene directly here using SceneManager.LoadScene
+            // SceneManager.LoadScene(sceneNames[currentIndex]);
         }
     }
 }
